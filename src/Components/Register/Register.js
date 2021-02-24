@@ -6,7 +6,9 @@ class Register extends React.Component {
 		this.state = {
 			email: '',
 			password: '',
-			name: ''
+			name: '',
+			conpassword: '',
+			error:''
 		}
 	}
 
@@ -21,9 +23,17 @@ class Register extends React.Component {
 	onPasswordChange = (event) => {
 		this.setState({ password: event.target.value })
 	}
+	onConPasswordChange = (event) => {
+		this.setState({ conpassword: event.target.value })
+	}
 
 	onSubmitRegister = () => {
-		fetch('https://peaceful-sea-70256.herokuapp.com/register', {
+		console.log(this.state.password)
+		console.log(this.state.conpassword)
+		if (!this.state.email || !this.state.name || !this.state.password || (this.state.password !== this.state.conpassword)){
+			this.setState({error:'Invalid Register'});
+		} else {
+		fetch('http://localhost:4000/register', {
 			method:'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
@@ -40,6 +50,7 @@ class Register extends React.Component {
 			}
 		})	
 	}
+}
 
 	render() { 
 		return(
@@ -75,6 +86,15 @@ class Register extends React.Component {
 				        name="password"  
 				        id="password" />
 				      </div>
+				      <div className="mv3">
+				        <label className="db fw6 lh-copy f6" htmlFor="password">Confirm Password</label>
+				        <input 
+				        onChange={this.onConPasswordChange} 
+				        className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+				        type="password" 
+				        name="password"  
+				        id="password" />
+				      </div>
 				    </fieldset>
 				    <div className="">
 				      <input 
@@ -83,6 +103,9 @@ class Register extends React.Component {
 				      type="submit" 
 				      value="Register"
 				       />
+				    </div>
+				    <div className="">
+				      {this.state.error}
 				    </div>
 				  </div>
 				</main>

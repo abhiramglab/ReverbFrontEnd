@@ -11,7 +11,7 @@ class Card extends React.Component{
 	}
 
 	deleteNote = () => {
-		fetch('https://peaceful-sea-70256.herokuapp.com/deletenote', {
+		fetch('http://localhost:4000/deletenote', {
 			method: 'delete',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({

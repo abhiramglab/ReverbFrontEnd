@@ -1,4 +1,5 @@
 import React from 'react'
+import Particles from 'react-particles-js';
 import Navigation from './Components/Navigation/Navigation'
 import Logo from './Components/Logo/Logo'
 import Title from './Components/Title/Title'
@@ -9,6 +10,18 @@ import Register from './Components/Register/Register'
 
 import './App.css'
 import 'tachyons'
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 100,
+      density: {
+        enable: true,
+        value_area: 400
+      }
+    }
+  }
+}
 
 class App extends React.Component {
     constructor() {
@@ -48,6 +61,9 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+      <Particles className='particles'
+         params={particlesOptions}
+      />
         <Navigation 
         onRouteChange={this.onRouteChange} 
         isSignedIn={this.state.isSignedIn} 
